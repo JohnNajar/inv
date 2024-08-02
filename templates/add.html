@@ -1,0 +1,143 @@
+<!-- rev 0.10 -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action" id="add-category-link">Add New Category</a>
+            <a href="#" class="list-group-item list-group-item-action" id="add-subcategory-link">Add New Subcategory</a>
+            <a href="#" class="list-group-item list-group-item-action" id="add-single-item-link">Add Single Item</a>
+            <a href="#" class="list-group-item list-group-item-action" id="add-multiple-items-link">Add Multiple Items</a>
+            <a href="#" class="list-group-item list-group-item-action" id="modify-item-link">Modify Item</a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div id="add-category" class="d-none">
+            <h3>Add New Category</h3>
+            <form id="add-category-form" class="form-inline mt-3">
+                <input type="text" name="categoryName" class="form-control mr-2" placeholder="Category Name">
+                <button type="submit" class="btn btn-primary">Add Category</button>
+            </form>
+        </div>
+
+        <div id="add-subcategory" class="d-none">
+            <h3>Add New Subcategory</h3>
+            <form id="add-subcategory-form" class="form-inline mt-3">
+                <input type="text" name="subcategoryName" class="form-control mr-2" placeholder="Subcategory Name">
+                <select name="categoryId" class="form-control mr-2" id="add-subcategory-category">
+                    {% for category in categories %}
+                    <option value="{{ category[0] }}">{{ category[1] }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary">Add Subcategory</button>
+            </form>
+        </div>
+
+        <div id="add-single-item" class="d-none">
+            <h3>Add Single Item</h3>
+            <form id="add-single-item-form" class="form mt-3">
+                <div class="form-group">
+                    <label for="single-item-name">Item Name:</label>
+                    <input type="text" name="itemName" id="single-item-name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="single-item-amount">Amount:</label>
+                    <input type="number" name="amount" id="single-item-amount" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="single-item-category">Category:</label>
+                    <select name="categoryId" id="single-item-category" class="form-control">
+                        <option value="">Select Category</option>
+                        {% for category in categories %}
+                        <option value="{{ category[0] }}">{{ category[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group d-none" id="single-item-subcategory-container">
+                    <label for="single-item-subcategory">Subcategory:</label>
+                    <select name="subcategoryId" id="single-item-subcategory" class="form-control">
+                        <option value="">Select Subcategory</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Item</button>
+            </form>
+        </div>
+
+        <div id="add-multiple-items" class="d-none">
+            <h3>Add Multiple Items</h3>
+            <form id="add-multiple-items-form" class="form mt-3">
+                <div class="form-group">
+                    <label for="multiple-item-names">Item Names (comma separated):</label>
+                    <textarea name="itemNames" id="multiple-item-names" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="multiple-item-amount">Amount:</label>
+                    <input type="number" name="amount" id="multiple-item-amount" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="multiple-item-category">Category:</label>
+                    <select name="categoryId" id="multiple-item-category" class="form-control">
+                        <option value="">Select Category</option>
+                        {% for category in categories %}
+                        <option value="{{ category[0] }}">{{ category[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group d-none" id="multiple-item-subcategory-container">
+                    <label for="multiple-item-subcategory">Subcategory:</label>
+                    <select name="subcategoryId" id="multiple-item-subcategory" class="form-control">
+                        <option value="">Select Subcategory</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Items</button>
+            </form>
+        </div>
+
+        <div id="modify-item" class="d-none">
+            <h3>Modify Item</h3>
+            <form id="modify-item-form" class="form mt-3">
+                <div class="form-group">
+                    <label for="modify-category">Category:</label>
+                    <select name="categoryId" id="modify-category" class="form-control">
+                        <option value="">Select Category</option>
+                        {% for category in categories %}
+                        <option value="{{ category[0] }}">{{ category[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group d-none" id="subcategory-container">
+                    <label for="modify-subcategory">Subcategory:</label>
+                    <select name="subcategoryId" id="modify-subcategory" class="form-control">
+                        <option value="">Select Subcategory</option>
+                    </select>
+                </div>
+                <div class="form-group d-none" id="item-container">
+                    <label for="modify-item-select">Item:</label>
+                    <select name="itemId" id="modify-item-select" class="form-control">
+                        <option value="">Select Item</option>
+                    </select>
+                </div>
+                <div class="form-group d-none" id="modify-details">
+                    <label for="new-name">Item Name:</label>
+                    <input type="text" name="itemName" id="new-name" class="form-control">
+                    <label for="new-amount">Amount:</label>
+                    <input type="number" name="amount" id="new-amount" class="form-control">
+                    <label for="new-category">New Category:</label>
+                    <select name="newCategoryId" id="new-category" class="form-control">
+                        <option value="">Select Category</option>
+                        {% for category in categories %}
+                        <option value="{{ category[0] }}">{{ category[1] }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="new-subcategory">New Subcategory:</label>
+                    <select name="newSubcategoryId" id="new-subcategory" class="form-control">
+                        <option value="">Select Subcategory</option>
+                    </select>
+                </div>
+                <button type="submit" id="update-button" class="btn btn-primary d-none">Update Item</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

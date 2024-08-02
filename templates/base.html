@@ -1,0 +1,44 @@
+<!-- base.html -->
+<!-- rev 0.14 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <!-- Link to Bootswatch Cerulean Theme CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    {% with categories = get_navbar_categories() %}
+        {% include 'navbar.html' %}
+    {% endwith %}
+    <div class="container-fluid mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">&copy; 2024 Inventory Management System</span>
+        </div>
+    </footer>
+
+    <!-- Link to JavaScript files -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/amount_update.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/side_menu.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/add/add_category.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/add/add_subcategory.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/add/add_single_item.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/add/add_multiple_items.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/add/add_modify_item.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/add/category_selection.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/clear_button.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/users.js') }}"></script>
+</body>
+</html>

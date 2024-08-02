@@ -1,0 +1,139 @@
+/* styles.css */
+/* rev 0.13 */
+
+/* Add custom styling */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 70px;
+}
+
+.container-fluid {
+    flex: 1;
+}
+
+h1, h3 {
+    margin-bottom: 20px;
+}
+
+.form-inline .form-control {
+    margin-right: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+
+textarea.form-control {
+    height: 150px;
+}
+
+/* Center text on the main page */
+.center-text {
+    text-align: center;
+}
+
+/* Ensure form elements are responsive */
+.form-control {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Footer styling */
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Login page styling */
+.login-background {
+    background-color: #e9ecef;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-title {
+    position: absolute;
+    top: 10%;
+    text-align: center;
+    width: 100%;
+    color: #333;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.login-title {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Dialog styling */
+dialog {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Password toggle */
+.input-group-append {
+    cursor: pointer;
+}
+
+/* Bot preventer checkbox styling */
+.form-check-input.big-checkbox {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.25rem;
+    border: 2px solid #007bff;
+}
+
+.form-check-input.big-checkbox:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.form-check-input.big-checkbox:focus {
+    border-color: #0056b3;
+    box-shadow: none;
+}
+
+.form-check-label {
+    margin-left: 1rem;
+}

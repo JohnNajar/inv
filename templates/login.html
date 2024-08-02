@@ -1,0 +1,51 @@
+<!-- templates/login.html -->
+<!-- rev 0.08 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+</head>
+<body class="login-background">
+    <div class="site-title">
+        <h1>Inventory Management System</h1>
+    </div>
+    <div class="login-container">
+        <div class="login-box">
+            <h2 class="login-title">Login</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="toggle-password-visibility">
+                                <i class="bi bi-eye-slash" id="password-icon"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-check d-flex align-items-center">
+                    <input type="checkbox" class="form-check-input big-checkbox" id="bot-preventer" name="bot-preventer" required>
+                    <label class="form-check-label ml-2" for="bot-preventer">I'm not a robot</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Link to JavaScript files -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

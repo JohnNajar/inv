@@ -1,0 +1,17 @@
+<!-- rev 0.01 -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Select Category</h1>
+<form action="{{ url_for('pdf.generate_pdf') }}" method="post">
+    <div class="form-group">
+        <label for="category_id">Category</label>
+        <select name="category_id" id="category_id" class="form-control">
+            {% for category in categories %}
+            <option value="{{ category[0] }}">{{ category[1] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Generate PDF</button>
+</form>
+{% endblock %}
