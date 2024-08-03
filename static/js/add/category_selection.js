@@ -1,4 +1,6 @@
-// rev 0.01
+// static/js/add/category_selection.js
+// rev 0.02
+
 function loadCategorySelectionListeners() {
     const singleItemCategory = document.getElementById('single-item-category');
     if (singleItemCategory) {
@@ -150,4 +152,3 @@ function loadCategorySelectionListeners() {
         });
     }
 }
-

@@ -1,5 +1,5 @@
 // static/js/main.js
-// rev 0.03
+// rev 0.04
 
 document.addEventListener('DOMContentLoaded', (event) => {
     loadAmountUpdateListeners();
@@ -12,4 +12,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
     loadAddSingleItemListener();
     loadAddSubcategoryListener();
     loadCategorySelectionListeners();
+    loadRemoveListeners();
 });

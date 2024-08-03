@@ -1,5 +1,5 @@
 # blueprints/add.py
-# rev 0.12
+# rev 0.13
 from flask import Blueprint, redirect, render_template, request, g, current_app, jsonify, session, url_for
 import sqlite3
 
@@ -121,18 +121,65 @@ def modify_item():
         print(f"Error modifying item: {e}")
     return jsonify({'status': 'success', 'message': 'Item modified successfully'})
 
-@add_bp.route('/get_subcategories/<int:category_id>')
+@add_bp.route('/get_categories', methods=['GET'])
+def get_categories():
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT AUTOID, CATNAME FROM CATEGORY WHERE CATNAME != "General"')
+    categories = cursor.fetchall()
+    return jsonify([{'id': row[0], 'name': row[1]} for row in categories])
+
+@add_bp.route('/get_subcategories/<int:category_id>', methods=['GET'])
 def get_subcategories(category_id):
     db = get_db()
     cursor = db.cursor()
-    cursor.execute('SELECT AUTOID, SUBCATNAME FROM SUBCATEGORY WHERE CATEGORYID = ?', (category_id,))
+    cursor.execute('SELECT AUTOID, SUBCATNAME FROM SUBCATEGORY WHERE CATEGORYID = ? AND SUBCATNAME != "General"', (category_id,))
     subcategories = cursor.fetchall()
     return jsonify(subcategories)
 
-@add_bp.route('/get_items/<int:subcategory_id>')
+@add_bp.route('/get_items/<int:subcategory_id>', methods=['GET'])
 def get_items(subcategory_id):
     db = get_db()
     cursor = db.cursor()
     cursor.execute('SELECT ID, NAME FROM INVENTORY WHERE SUBCATEGORY = ?', (subcategory_id,))
     items = cursor.fetchall()
     return jsonify(items)
+
+@add_bp.route('/remove_category/<int:category_id>', methods=['POST'])
+def remove_category(category_id):
+    db = get_db()
+    cursor = db.cursor()
+    try:
+        cursor.execute('DELETE FROM CATEGORY WHERE AUTOID = ?', (category_id,))
+        db.commit()
+        return 'Category removed successfully', 200
+    except sqlite3.Error as e:
+        db.rollback()
+        print(f"Error removing category: {e}")
+        return 'An error occurred', 500
+
+@add_bp.route('/remove_subcategory/<int:subcategory_id>', methods=['POST'])
+def remove_subcategory(subcategory_id):
+    db = get_db()
+    cursor = db.cursor()
+    try:
+        cursor.execute('DELETE FROM SUBCATEGORY WHERE AUTOID = ?', (subcategory_id,))
+        db.commit()
+        return 'Subcategory removed successfully', 200
+    except sqlite3.Error as e:
+        db.rollback()
+        print(f"Error removing subcategory: {e}")
+        return 'An error occurred', 500
+
+@add_bp.route('/remove_item/<int:item_id>', methods=['POST'])
+def remove_item(item_id):
+    db = get_db()
+    cursor = db.cursor()
+    try:
+        cursor.execute('DELETE FROM INVENTORY WHERE ID = ?', (item_id,))
+        db.commit()
+        return 'Item removed successfully', 200
+    except sqlite3.Error as e:
+        db.rollback()
+        print(f"Error removing item: {e}")
+        return 'An error occurred', 500

@@ -1,12 +1,16 @@
-// rev 0.01
+// static/js/add/add_category.js
+// rev 0.02
+
 function loadAddCategoryListener() {
-    document.getElementById('add-category-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-        fetch('/add_category', {
-            method: 'POST',
-            body: formData,
-        })
+    const addCategoryForm = document.getElementById('add-category-form');
+    if (addCategoryForm) {
+        addCategoryForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/add_category', {
+                method: 'POST',
+                body: formData,
+            })
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
@@ -14,5 +18,6 @@ function loadAddCategoryListener() {
                     this.reset();
                 }
             });
-    });
+        });
+    }
 }
